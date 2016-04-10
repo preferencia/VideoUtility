@@ -141,7 +141,9 @@ CVideoCopyRendererDlg::~CVideoCopyRendererDlg()
         m_pScreenWnd = NULL;
     }
 
+#ifdef _USE_GDIPLUS
 	::GdiplusShutdown(m_gdiplusToken);
+#endif
 }
 
 void CVideoCopyRendererDlg::DoDataExchange(CDataExchange* pDX)
@@ -193,8 +195,10 @@ BOOL CVideoCopyRendererDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
+#ifdef _USE_GDIPLUS
 	GdiplusStartupInput gdiplusStartupInput;
     ::GdiplusStartup(&m_gdiplusToken, &gdiplusStartupInput, NULL);
+#endif
 
 	SetWindowPos(NULL, 0, 0, _DEC_WINDOW_WIDTH, _DEC_WINDOW_HEIGHT, SWP_NOMOVE);
 
